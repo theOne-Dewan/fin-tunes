@@ -22,19 +22,15 @@ import {
   function Player() {
     const spotifyApi = useSpotify();
     const { data: session, status } = useSession();
-    const [currentTrackId, setCurrentIdTrack] =
-      useRecoilState(currentTrackIdState);
+    const [currentTrackId, setCurrentIdTrack] = useRecoilState(currentTrackIdState);
     const [isPlaying, setIsPlaying] = useRecoilState(isPlayingState);
     const [volume, setVolume] = useState(50);
-  
     const songInfo = useSongInfo();
   
-    // console.log(songInfo);
   
     const fetchCurrentSong = () => {
       if (!songInfo) {
         spotifyApi.getMyCurrentPlayingTrack().then((data) => {
-          console.log("Now playing: ", data.body?.item);
           setCurrentIdTrack(data.body?.item?.id);
   
           spotifyApi
@@ -45,7 +41,7 @@ import {
       }
     };
   
-    // Fetch the song on first load before any song has been loaded...
+    //When the app mounts this fetches songs before any song has been loaded
     useEffect(() => {
       if (spotifyApi.getAccessToken() && !currentTrackId) {
         fetchCurrentSong();
@@ -112,10 +108,7 @@ import {
         </div>
   
         <div className="flex items-center space-x-3 md:space-x-4 justify-end pr-5">
-          <VolumeDownIcon
-            onClick={() => volume > 0 && setVolume(volume - 10)}
-            className="button"
-          />
+          <VolumeDownIcon onClick={() => volume > 0 && setVolume(volume - 10)} className="button"/>
           <input
             type="range"
             className="w-14 md:w-28"
@@ -124,11 +117,7 @@ import {
             min={0}
             max={100}
           />
-  
-          <VolumeUpIcon
-            onClick={() => volume < 100 && setVolume(volume + 10)}
-            className="button"
-          />
+          <VolumeUpIcon onClick={() => volume < 100 && setVolume(volume + 10)} className="button"/>
         </div>
       </div>
     );
