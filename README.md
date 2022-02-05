@@ -21,3 +21,6 @@ This fully responsive music streaming React app allows users to login, select va
 * This app is responsive and the UI changes to fit mobile screens.
 * NOTE: Because of Spotify's stick API usage policies, the user must be active on their Spotify account while using this app to allow the app to use the Spotify API.
 
+## Demo
+
+https://youtu.be/5C033yfQz5U
